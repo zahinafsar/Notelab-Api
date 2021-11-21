@@ -27,14 +27,15 @@ namespace notelab.Controllers
             {
                 return Unauthorized("Login first!");
             }
-            var user = _auth.TokenVerify(token);
-            return Ok(_db.users.Where(a => a.Id.ToString() == user.Issuer).Include(u => u.Notes).FirstOrDefault());
+            try
+            {
+                var user = _auth.TokenVerify(token);
+                return Ok(_db.users.Where(a => a.Id.ToString() == user.Issuer).Include(u => u.Notes).FirstOrDefault());
+            }
+            catch (System.Exception)
+            {
+                return Unauthorized("Sesson Timeout. Please login again!");
+            }
         }
-        // [HttpGet("/mynotes")]
-        // public ICollection<Notes> GetUsersNotes(int id)
-        // {
-        //     var user = _db.users.Where(a=>a.Id == id).Include(u => u.Notes).FirstOrDefault();
-        //     return user.Notes;
-        // }
     }
 }
