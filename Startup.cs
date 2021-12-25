@@ -17,6 +17,7 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using notelab.app.DbContext;
 using notelab.Helper;
+using notelab.Model;
 
 namespace notelab.app
 {
@@ -46,8 +47,13 @@ namespace notelab.app
             //         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Jwt:Key"]))    
             //     };    
             // });
+            var emailConfig = Configuration
+                .GetSection("EmailConfiguration")
+                .Get<EmailConfiguration>();
+            services.AddSingleton(emailConfig);
             services.AddControllers();
             services.AddTransient<Authentication>();
+            services.AddTransient<EmailSender>();
             services.AddDbContext<DataContext>(opt => {
                 opt.EnableDetailedErrors();
                 opt.UseNpgsql(Configuration.GetConnectionString("db"));

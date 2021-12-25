@@ -50,3 +50,7 @@ I:\notelab\bin\Debug\net6.0\Microsoft.IdentityModel.Protocols.dll
 I:\notelab\bin\Debug\net6.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
 I:\notelab\bin\Debug\net6.0\Microsoft.IdentityModel.Tokens.dll
 I:\notelab\bin\Debug\net6.0\System.IdentityModel.Tokens.Jwt.dll
+I:\notelab\bin\Debug\net6.0\MailKit.dll
+I:\notelab\bin\Debug\net6.0\MimeKit.dll
+I:\notelab\bin\Debug\net6.0\NETCore.MailKit.dll
+I:\notelab\bin\Debug\net6.0\BouncyCastle.Crypto.dll

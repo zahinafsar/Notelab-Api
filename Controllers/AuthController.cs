@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using notelab.app.DbContext;
 using notelab.app.Model;
 using notelab.Helper;
+using notelab.Model;
 
 namespace notelab.Controllers
 {
@@ -15,9 +16,11 @@ namespace notelab.Controllers
     {
         public DataContext _db;
         public Authentication _auth;
-        public AuthController(DataContext dataContext, Authentication authentication){
+        public EmailSender _emailSender;
+        public AuthController(DataContext dataContext, Authentication authentication, EmailSender emailSender){
             _db = dataContext;
             _auth = authentication;
+            _emailSender = emailSender;
         }
         [AllowAnonymous]
         [HttpPost("login")]
@@ -35,6 +38,8 @@ namespace notelab.Controllers
                 {
                     HttpOnly = true
                 });
+                var message = new Message(new string[] { "afsarzahin@gmail.com" }, "NotLab", "Succesfully logged in a new device.");
+                _emailSender.SendEmail(message);
                 return Ok("logged in");
             }
             else
